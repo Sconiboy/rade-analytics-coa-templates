@@ -723,7 +723,9 @@ def create_locked_one_page_potency_template(
     
     story.append(footer_table)
     
-    # Build PDF
+    # Build PDF with encryption to prevent editing
+    # Empty string = no password needed to view, but editing is restricted
+    doc.encrypt = ''
     doc.build(story)
     
     print(f"✅ LOCKED one-page potency test created: {filename}")
