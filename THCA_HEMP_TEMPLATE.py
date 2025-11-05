@@ -571,11 +571,18 @@ def create_locked_one_page_potency_template(
     cbga_pct = round(rng.uniform(0.50, 0.95), 2)
     cbc_pct = round(rng.uniform(0.10, 0.25), 2)
     
+    # Calculate Total CBD using decarboxylation formula (like Total THC)
+    # Total CBD = (CBDa × 0.877) + CBD
+    total_cbd_calculated = round((cbda_pct * 0.877) + cbd_pct, 2)
+    
+    # Calculate Total Cannabinoids as sum of all cannabinoids
+    total_cann_calculated = round(d9_thc_pct + thca_pct + cbd_pct + cbda_pct + cbn_pct + cbg_pct + cbga_pct + cbc_pct, 2)
+    
     # 🔒 LOCKED: Professional summary boxes WITHOUT PASS status (as requested)
     # Format all values to exactly 2 decimal places
     thc_display = f"{total_thc_calculated:.2f}"  # Use calculated Total THC
-    cbd_display = f"{float(cbd_percentage):.2f}"
-    total_cann_display = f"{float(total_cannabinoids):.2f}"
+    cbd_display = f"{total_cbd_calculated:.2f}"  # Use calculated Total CBD
+    total_cann_display = f"{total_cann_calculated:.2f}"  # Use calculated sum
     
     totals_data = [
         ['Total THC', 'Total CBD', 'Total Cannabinoids'],
